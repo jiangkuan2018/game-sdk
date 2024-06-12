@@ -1,36 +1,34 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { log } from '@idgtn-game-sdk/core'
-import HelloWorld from './components/HelloWorld.vue'
+
 
 onMounted(() => {
   console.log(log)
-}) 
+  fetch('http://localhost:3000/game-files/list').then(res => res.json()).then(res => {
+    console.log(res)
+  })
+})
+
+function createGame() {
+  fetch('http://localhost:3000/game-files/create-local-game-dir', {
+    method: 'POST', // 使用 POST 方法
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      url: 'https://vivo-center.minigame.vip/game/block-puzzle-guardian/play?from=home'
+    })
+  }).then(res => res.json()).then(res => {
+    console.log(res)
+  })
+}
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <button @click="createGame">create</button>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+
