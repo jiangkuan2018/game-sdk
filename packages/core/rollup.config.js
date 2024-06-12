@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'rollup'
+// import JavaScriptObfuscator from 'javascript-obfuscator'
 // import typescript from '@rollup/plugin-typescript'
 import terser from '@rollup/plugin-terser'
 import * as rimraf from 'rimraf'
@@ -19,9 +20,7 @@ function removeDist() {
     }
   }
 }
-const dev = [
-  // typescript()
-]
+const dev = []
 const prod = [
   removeDist(),
   // typescript(),
@@ -44,6 +43,22 @@ export default defineConfig({
     }
   ],
   plugins: development ? dev : prod,
+  // plugins: [
+  //   {
+  //     name: 'rollup-plugin-obfuscator-code',
+  //     // version: '1.0.0',
+  //     transform(code) {
+  //       // console.log({ code, sourceFile })
+  //       // return code
+  //       const result = JavaScriptObfuscator.obfuscate(code)
+  //       console.log(result.getSourceMap())
+  //       return {
+  //         code: result.getObfuscatedCode(),
+  //         map: result.getSourceMap() || null
+  //       }
+  //     }
+  //   }
+  // ],
   onwarn(warning, warn) {
     if (warning.code === 'THIS_IS_UNDEFINED') {
       return

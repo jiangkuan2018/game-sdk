@@ -1,3 +1,4 @@
+const a = 'abc'
 export function log() {
-  console.log('123')
+  console.log(a)
 }
