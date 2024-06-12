@@ -1,0 +1,13 @@
+{
+  "name": "idgtn-game-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm --stream --parallel --reporter=append-only --filter './packages/**' dev",
+    "install-all": "pnpm i --filter './packages/**'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
