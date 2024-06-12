@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@idgtn-game-sdk/web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@idgtn-game-sdk/core": "workspace:^",
     "vue": "^3.4.21"
   },
   "devDependencies": {

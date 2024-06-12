@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { log } from '@idgtn-game-sdk/core'
 import HelloWorld from './components/HelloWorld.vue'
+
+onMounted(() => {
+  console.log(log)
+}) 
 </script>
 
 <template>

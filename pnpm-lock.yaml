@@ -104,6 +104,9 @@ importers:
 
   packages/web:
     dependencies:
+      '@idgtn-game-sdk/core':
+        specifier: workspace:^
+        version: link:../core
       vue:
         specifier: ^3.4.21
         version: 3.4.27(typescript@5.4.5)
