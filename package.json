@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm --stream --parallel --reporter=append-only --filter './packages/**' dev",
+    "docs:dev": "pnpm --filter @idgtn-game-sdk/docs docs:dev",
     "install-all": "pnpm i --filter './packages/**'"
   },
   "keywords": [],
