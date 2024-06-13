@@ -1,0 +1,25 @@
+{
+  "game_name": "Test Game",
+  "afg": {
+    "attributes": {
+      "data_ad_client": "ca-pub-5653995119789089",
+      "data_ad_frequency_hint": "30s",
+      "data_adbreak_test": "on",
+      "crossorigin": "anonymous",
+      "data_ad_channel": "7354389916"
+    },
+    "config": {
+      "preloadAdBreaks": "on",
+      "sound": "on",
+      "preroll": true
+    },
+    "adv": {
+      "config": {
+        "start_or_not_interstitial": true,
+        "start_or_not_rewarded_video": true,
+        "ad_delay_for_first_interstitial": 30,
+        "ad_delay_for_first_rewarded_video": 5
+      }
+    }
+  }
+}

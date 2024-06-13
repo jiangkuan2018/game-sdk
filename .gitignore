@@ -2,4 +2,5 @@ node_modules
 dist
 build
 .env
-packages/server/public/games
+packages/server/public/games/*
+packages/server/public/s-assets/H5-1/*
