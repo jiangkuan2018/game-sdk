@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "dev": "rollup -cw",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "publish": "node ./pub.js"
   },
   "keywords": [],
   "author": "",
