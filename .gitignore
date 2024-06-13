@@ -4,3 +4,4 @@ build
 .env
 packages/server/public/games/*
 packages/server/public/s-assets/H5-1/*
+packages/docs/.vitepress/cache/*
