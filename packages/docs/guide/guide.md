@@ -2,11 +2,16 @@
 outline: deep
 ---
 
-# Runtime API Examples
+# footbzgame SDK内部对接流程
 
-This page demonstrates usage of some of the runtime APIs provided by VitePress.
+游戏内部
 
-The main `useData()` API can be used to access site, theme, and page data for the current page. It works in both `.md` and `.vue` files:
+1、将 footbzgame-config.json ⽂件拷⻉到与index.html⻚⾯的根⽬录的同级
+
+2、index.html ⽂件
+
+`<head>`在中载⼊SDK⽂件
+
 
 ```md
 <script setup>
