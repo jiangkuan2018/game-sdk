@@ -2,8 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'rollup'
-// import JavaScriptObfuscator from 'javascript-obfuscator'
-// import typescript from '@rollup/plugin-typescript'
+import { babel } from '@rollup/plugin-babel';
+import JavaScriptObfuscator from 'javascript-obfuscator'
 import terser from '@rollup/plugin-terser'
 import * as rimraf from 'rimraf'
 
@@ -16,15 +16,70 @@ function removeDist() {
   return {
     name: 'rollup-plugin-remove-dist',
     buildStart(inputOptions) {
-      rimraf.sync(path.resolve(__dirname, './dist'))
+      if (!development) {
+        rimraf.sync(path.resolve(__dirname, './dist'))
+      }
     }
   }
 }
-const dev = []
+
+function codeObfuscator() {
+  return {
+    name: 'rollup-plugin-javascript-obfuscator',
+    transform(code, fileName) {
+      const result = JavaScriptObfuscator.obfuscate(code, {
+        compact: true,
+        controlFlowFlattening: false,
+        deadCodeInjection: false,
+        debugProtection: false,
+        debugProtectionInterval: 0,
+        disableConsoleOutput: false,
+        identifierNamesGenerator: 'hexadecimal',
+        log: false,
+        numbersToExpressions: false,
+        renameGlobals: false,
+        selfDefending: false,
+        simplify: true,
+        splitStrings: false,
+        stringArray: true,
+        stringArrayCallsTransform: false,
+        stringArrayCallsTransformThreshold: 0.5,
+        stringArrayEncoding: [],
+        stringArrayIndexShift: true,
+        stringArrayRotate: true,
+        stringArrayShuffle: true,
+        stringArrayWrappersCount: 1,
+        stringArrayWrappersChainedCalls: true,
+        stringArrayWrappersParametersMaxCount: 2,
+        stringArrayWrappersType: 'variable',
+        stringArrayThreshold: 0.75,
+        unicodeEscapeSequence: false,
+        inputFileName: fileName,
+        sourceMap: development
+      })
+      return {
+        code: result.getObfuscatedCode(),
+        map: development ? result.getSourceMap() : undefined
+      }
+    }
+  }
+}
+
+const dev = [
+  babel({
+    babelHelpers: 'bundled',
+    exclude: 'node_modules/**'
+  })
+]
+
 const prod = [
-  removeDist(),
-  // typescript(),
-  terser()
+  babel({
+    babelHelpers: 'bundled',
+    exclude: 'node_modules/**'
+  }),
+  codeObfuscator(),
+  terser(),
+  removeDist()
 ]
 
 export default defineConfig({
@@ -42,27 +97,5 @@ export default defineConfig({
       sourcemap: development
     }
   ],
-  plugins: development ? dev : prod,
-  // plugins: [
-  //   {
-  //     name: 'rollup-plugin-obfuscator-code',
-  //     // version: '1.0.0',
-  //     transform(code) {
-  //       // console.log({ code, sourceFile })
-  //       // return code
-  //       const result = JavaScriptObfuscator.obfuscate(code)
-  //       console.log(result.getSourceMap())
-  //       return {
-  //         code: result.getObfuscatedCode(),
-  //         map: result.getSourceMap() || null
-  //       }
-  //     }
-  //   }
-  // ],
-  onwarn(warning, warn) {
-    if (warning.code === 'THIS_IS_UNDEFINED') {
-      return
-    }
-    warn(warning)
-  }
+  plugins: development ? dev : prod
 })
