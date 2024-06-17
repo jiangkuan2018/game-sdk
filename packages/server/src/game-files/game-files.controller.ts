@@ -10,8 +10,6 @@ import { GameFilesService } from './game-files.service';
 import { join, resolve } from 'path';
 import * as fs from 'fs';
 import { endsWith, filter, includes, map } from 'lodash';
-// import { GetParamFullPath } from 'src/';
-// import { Response } from 'express'
 
 @Controller('game-files')
 export class GameFilesController {
@@ -60,8 +58,4 @@ export class GameFilesController {
 
     return { data };
   }
-  // @Get('/oss-not-found-handle/:fullPath?*')
-  // ossNotFound(@GetParamFullPath() fullPath: string) {
-  //   return fullPath;
-  // }
 }

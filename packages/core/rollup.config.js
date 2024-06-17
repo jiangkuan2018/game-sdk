@@ -82,20 +82,27 @@ const prod = [
   removeDist()
 ]
 
-export default defineConfig({
-  input: './src/index.js',
-  output: [
-    {
-      format: 'cjs',
-      file: './dist/index.cjs.min.js',
-      sourcemap: development,
-      name: pkg.name
-    },
-    {
-      format: 'es',
-      file: './dist/index.es.min.js',
-      sourcemap: development
-    }
-  ],
-  plugins: development ? dev : prod
-})
+export default defineConfig([
+  {
+    input: './src/ads/game.js',
+    output: [
+      {
+        format: 'amd',
+        file: './dist/ads-game.min.js',
+        sourcemap: development
+      }
+    ],
+    plugins: development ? dev : prod
+  },
+  {
+    input: './src/ads/site.js',
+    output: [
+      {
+        format: 'amd',
+        file: './dist/ads-site.min.js',
+        sourcemap: development
+      }
+    ],
+    plugins: development ? dev : prod
+  }
+])

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { log } from '@idgtn-game-sdk/core'
+// import x from '@idgtn-game-sdk/core'
 
 
 onMounted(() => {
-  console.log(log)
+  // console.log(x)
   fetch('http://localhost:3000/game-files/list').then(res => res.json()).then(res => {
     console.log(res)
   })
