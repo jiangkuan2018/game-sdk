@@ -8,6 +8,7 @@ onMounted(() => {
   fetch('http://localhost:3000/game-files/list').then(res => res.json()).then(res => {
     console.log(res)
   })
+  console.log(window.gamePlatformContent)
 })
 
 function createGame() {
