@@ -1,4 +1,4 @@
-export default class GamePlatformContent {
+class GamePlatformContent {
   constructor() {
     this.lastShowVedioTime = 0
     this.lastShowAfgTime = 0

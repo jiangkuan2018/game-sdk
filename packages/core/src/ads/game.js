@@ -1,4 +1,4 @@
-window.gamePlatformAdv = class GamePlatformContent {
+class GamePlatformContent {
   constructor() {
     this.lastShowVedioTime = 0
     this.lastShowAfgTime = 0
@@ -153,6 +153,7 @@ window.gamePlatformAdv = class GamePlatformContent {
       if (xhr.status == 404) {
         return
       } else {
+        
         const script = document.createElement('script')
         script.async = true
         script.src = gaUrl
@@ -361,3 +362,4 @@ window.gamePlatformAdv = class GamePlatformContent {
 }
 
 GamePlatformContent._instance = null
+window.gamePlatformAdv = new GamePlatformContent()

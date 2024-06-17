@@ -1,4 +1,4 @@
-window.gamePlatformContent = new class GamePlatformContent {
+class GamePlatformContent {
   constructor() {
     this.lastShowVedioTime = 0
     this.lastShowAfgTime = 0
@@ -312,6 +312,4 @@ window.gamePlatformContent = new class GamePlatformContent {
 }
 
 GamePlatformContent._instance = null
-// 挂在sdk
-// window['GamePlatformContent'] = new GamePlatformContent()
-// window.GamePlatformContent.initializeAsync()
+window.gamePlatformContent = new GamePlatformContent()

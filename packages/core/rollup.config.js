@@ -6,6 +6,7 @@ import { babel } from '@rollup/plugin-babel';
 import JavaScriptObfuscator from 'javascript-obfuscator'
 import terser from '@rollup/plugin-terser'
 import * as rimraf from 'rimraf'
+import serve from 'rollup-plugin-serve'
 
 const development = process.env.ROLLUP_WATCH === 'true'
 const __filename = fileURLToPath(import.meta.url)
@@ -28,7 +29,7 @@ function codeObfuscator() {
     name: 'rollup-plugin-javascript-obfuscator',
     transform(code, fileName) {
       const result = JavaScriptObfuscator.obfuscate(code, {
-        compact: true,
+        compact: false,
         controlFlowFlattening: false,
         deadCodeInjection: false,
         debugProtection: false,
@@ -65,21 +66,18 @@ function codeObfuscator() {
   }
 }
 
-const dev = [
-  babel({
-    babelHelpers: 'bundled',
-    exclude: 'node_modules/**'
-  })
-]
 
-const prod = [
+const plugins = [
+  removeDist(),
   babel({
     babelHelpers: 'bundled',
     exclude: 'node_modules/**'
   }),
-  codeObfuscator(),
   terser(),
-  removeDist()
+  serve({
+    contentBase: './dist',
+    port: 3001
+  })
 ]
 
 export default defineConfig([
@@ -87,22 +85,46 @@ export default defineConfig([
     input: './src/ads/game.js',
     output: [
       {
-        format: 'amd',
+        format: 'umd',
         file: './dist/ads-game.min.js',
         sourcemap: development
       }
     ],
-    plugins: development ? dev : prod
+    plugins,
   },
   {
     input: './src/ads/site.js',
     output: [
       {
-        format: 'amd',
+        format: 'umd',
         file: './dist/ads-site.min.js',
         sourcemap: development
       }
     ],
-    plugins: development ? dev : prod
+    plugins,
+  }
+  ,
+  {
+    input: './src/adx/site.js',
+    output: [
+      {
+        format: 'umd',
+        file: './dist/adx-site.min.js',
+        sourcemap: development
+      }
+    ],
+    plugins,
+  }
+  ,
+  {
+    input: './src/adx/game.js',
+    output: [
+      {
+        format: 'umd',
+        file: './dist/adx-game.min.js',
+        sourcemap: development
+      }
+    ],
+    plugins,
   }
 ])
